@@ -1,0 +1,64 @@
+*1) Start Microsoft Management Console, mmc (Windows+R and type mmc).
+*2) Add the snap-in, SQL Server Configuration Manager
+*3) Expand the SQL Server Configuration Manager
+*4) Select SQL Server Network Configuration
+*5) Select Protocols for PTT42
+*6) Enable TCP/IP
+*7) Right click TCP/IP and select Properties
+*8) Select the IP Addresses tab
+*9) Find IPAll (usually the last item)
+*10) Set TCP Port to 1433
+*11) Select OK and close the Properties window. You may get an alert. Just close it.
+*12) Select SQL Server Services in the left pane
+*13) Right click on SQL Server (PTT42) in the right pane and Select Restart. This should set restart the service with the properties changed in the configuration.
+*14) A dialog should appear showing the service stopping then starting. The service state should be "Running" after the completion of this action.
+*15) Start SQL Server Management Studio
+*16) Change the Server name filed to "PCCAR,1433."
+*17) Connect
+*18) Expand the Databases on the left side. You should see the System Databases
+
+*If all this works, SQL Server is set up as it should be for now. You can close both Management Studio and the Configuration Manager.
+
+b. Compile and link FLAMES
+
+*1) Open an Explorer window
+*2) Go to the folder where you pulled the FLAMES code
+*3) Open the "build" directory
+*4) Get the flames.sln.bat from Erin
+*5) Update it for Chris' machine
+*6) double click flames.sln.bat
+*7) With Visual Studio open, build both Debug and Release
+
+c. Now make sure the sethome.bat file that you copied is correct for Chris' machine.
+
+*1) Open an administrator command shell.
+*1a) change directory to the c2wsptt home directory
+*2) Run sethome.bat
+*3) Verify the environment is correct (set FLAMES)
+*4) Change directory to the bin directory
+*5) Run RegisterMapWindow.bat
+*6) Change directory to "cm"
+*7) Run CleanDatabase.bat (There may be a few errors but not many)
+*8) Open SQL Server Management Studio and Connect
+*9) Expand the Databases in the left pane. You should see a runtime and mcdb database
+
+d. Compile and link the PTT applications
+
+*1) Start with the service solution. Open another command shell in the c2wsptt directory and run sethome.bat. This one should not be an administrator. 
+*2) Enter servicedev. Visual Studio should open.
+*3) Make sure Debug is selected and Build the solution
+*4) Enter tooldev in the command shell. VS should open with the Tools Solution.
+*5) Select Debug and build the solution
+*7) Select Debug and build the solution.
+6) Finally, enter dev in the command shell. VS should open with the PTTSI solution
+
+If there are errors building PTTSI, it is likely because the MapWindows OCX file was not registered correctly. Go back to the administrator shell. Change directory to the "bin" directory. Enter the following command (regsvr32 MapWinGIS.ocx). An alert should appear telling you that the OCX was registered successfully.
+
+8) Go back and try to build the solution again. It should build.
+
+See Joel/Gary if you run into problems. They may be able to help with VS setup and MapWindow. SQL Server stuff they may not be able to help with much.
+
+If you get stuck, continue reading the Coding standards and the User Guide.
+
+Hang in there. I will see you later in the morning most likely.
+Banned prosudures: strcpy, strcat, sprintf and vsprintf
